@@ -53,6 +53,19 @@ end
 
 
 =begin
+OUTPUT :->
+
+Mobile number 8600089664 is valid
+Email address ravidasmg@gmail.com is valid
+Name Ravidas Gaikwad is valid
+Gender M is valid
+Amount 2345 is valid
+
+8jhdghf$@^&h Mobile Number is invalid.
+ra!#vidasmg@gmail.com Email Address
+Ravi87678676as Gaikwad Name is invalid.
+N Genderis invalid.
+2hkjhkh345 Amount is invalid.
 
 
 
