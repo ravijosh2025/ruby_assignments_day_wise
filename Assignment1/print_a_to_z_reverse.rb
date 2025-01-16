@@ -1,24 +1,23 @@
 #3.Print a-z in reverse order
 
-def print_reverse_of_alphabets_method01
-      alphabets="abcdefghijklmnopqrstuvwxyz"
+def reverse_order_of_alphabets
+      alphabets=('a'..'z').to_a.join();
       last_index=alphabets.length-1
+
       while(last_index>=0)
         print(alphabets[last_index]+" ")
         last_index=last_index-1;
       end
-      puts
 end
-
-def print_reverse_of_alphabets_method02
+=begin
+def reverse_order_of_alphabets
   for letter in ('a'..'z').to_a.reverse
     print(letter+" ")
   end
-  puts
 end
+=end
+reverse_order_of_alphabets()
 
-print_reverse_of_alphabets_method01()
-print_reverse_of_alphabets_method02()
 
 =begin OUTPUT
 ravidas@ravidas-HP-EliteBook-840-G6:~/Desktop/Ruby_Code/Ruby_Assignments/Assignment1$ ruby print_a_to_z_reverse.rb

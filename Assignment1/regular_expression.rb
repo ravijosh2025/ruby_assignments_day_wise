@@ -1,69 +1,59 @@
 #4. Regex for mobile number, email address, name, gender(M / F) and  amount
 
-#Patterns to be matched.
+def validate_inputs_according_to_regx(input_value)
+    #Regular Expressions for validating inputs.
+    mobile_regex = /^(\+91|91)?[6-9]\d{9}$/
+    email_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    name_regex = /^[a-zA-Z]+(?:[\s'-][a-zA-Z]+)*$/
+    gender_regex = /^(M|F)$/
+    amount_regex = /^\d+(\.\d{1,2})?$/
+    
+    #Validating inputs by using ternary operator.
 
-mobile_regex = /^(\+91|91)?[6-9]\d{9}$/
-email_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-name_regex = /^[a-zA-Z]+(?:[\s'-][a-zA-Z]+)*$/
-gender_regex = /^(M|F)$/
-amount_regex = /^\d+(\.\d{1,2})?$/
+    mobile_regex.match?(input_value["mobile"])? 
+      (puts "Mobile number #{input_value["mobile"]} is valid"):
+      (puts "#{input_value["mobile"]} Mobile Number is invalid.")
+    email_regex.match?(input_value["email"])? 
+      (puts "Email address #{input_value["email"]} is valid"):
+      (puts "#{input_value["email"]} Email Address")
+    name_regex.match?(input_value["name"])? 
+      (puts "Name #{input_value["name"]} is valid"):
+      (puts "#{input_value["name"]} Name is invalid.")
+    gender_regex.match?(input_value["gender"])?
+      (puts "Gender #{input_value["gender"]} is valid"):
+      (puts "#{input_value["gender"]} Genderis invalid.")
+    amount_regex.match?(input_value["amount"])? 
+      (puts "Amount #{input_value["amount"]} is valid"):
+      (puts "#{input_value["amount"]} Amount is invalid.")
+end
 
-# Take Inputs.
-puts "Enter Mobile Number :->"
-mobile = gets.chomp
-puts "Enter Email :->"
-email =gets.chomp
-puts "Enter name :->"
-name =gets.chomp
-puts "Enter Gender :->"
-gender = gets.chomp
-puts "Enetr Amount :->"
-amount =gets.chomp
+sample_inputs=[
+  {
+    "mobile"=>"8600089664",
+    "email"=>"ravidasmg@gmail.com",
+    "name"=>"Ravidas Gaikwad",
+    "gender"=>"M",
+    "amount"=>"2345"
+  },
+  {
+    "mobile"=>"8jhdghf$@^&h",
+    "email"=>"ra!#vidasmg@gmail.com",
+    "name"=>"Ravi87678676as Gaikwad",
+    "gender"=>"N",
+    "amount"=>"2hkjhkh345"
+  }
 
-#Printing Outputs.
+]
 
-mobile_regex.match?(mobile)? (puts "Mobile number is valid"):(puts "Invalid Mobile Number")
-email_regex.match?(email)? (puts "Email address is valid"):(puts "Invalid Email Address")
-name_regex.match?(name)? (puts "Name is valid"):(puts "Invalid Name")
-gender_regex.match?(gender)? (puts "Gender is valid"):(puts "Invalid Gender")
-amount_regex.match?(amount)? (puts "Amount is valid"):(puts "Invalid Amount")
+sample_inputs.each do |input_value|
+  validate_inputs_according_to_regx(input_value)
+  puts "\n"
+end
+
 
 
 =begin
-01-> ravidas@ravidas-HP-EliteBook-840-G6:~/Desktop/Ruby_Code/Ruby_Assignments/Assignment1$ ruby regular_expression.rb 
-Enter Mobile Number :->
-8600089664
-Enter Email :->
-ravidasmg@gmail.com
-Enter name :->
-Ravidas Gaikwad
-Enter Gender :->
-M
-Enetr Amount :->
-25000
 
-Mobile number is valid
-Email address is valid
-Name is valid
-Gender is valid
-Amount is valid
 
-02->ravidas@ravidas-HP-EliteBook-840-G6:~/Desktop/Ruby_Code/Ruby_Assignments/Assignment1$ ruby regular_expression.rb 
-Enter Mobile Number :->
-yqitriyt7
-Enter Email :->
-ggsagdfag
-Enter name :->
-3t6546
-Enter Gender :->
-ML
-Enetr Amount :->
-ttred
-
-Invalid Mobile Number
-Invalid Email Address
-Invalid Name
-Invalid Gender
-Invalid Amount 
 
 =end

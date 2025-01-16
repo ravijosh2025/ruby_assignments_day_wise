@@ -25,11 +25,11 @@ end
 #This method assigns grade by using if else statements.
 
 def print_grade(grade)
-  if grade>=1 && grade<=5
+  if(grade >= 1 && grade <= 5)
     return "Elementary"
-  elsif grade>=6 && grade<=8
+  elsif(grade >= 6 && grade <= 8)
     return "Middle School"
-  elsif grade>=9 && grade<=12
+  elsif(grade>= 9 && grade <= 12)
     return "High School"
   else
     return "College"

@@ -2,12 +2,12 @@
 
 def find_if_number_is_prime(number)
   # Number less 2 and negative numbers are non prime
-  if number<2 
+  if(number < 2) 
     return false
   end
 
   for index in 2..number/2   #Iterating till the half of number because after half there is no perfect divisor.
-    if number%index==0
+    if(number % index==0)
       return false
     end
   end
