@@ -14,7 +14,7 @@ Whether the country can win the war or not
 =end
 
 class CliApplication
-  
+  attr_accessor :country_name,:country_population,:country_gdp,:number_of_states,:army_strength,:state_of_country
   def initialize(name,population,gdp,states,strength,state)
     @country_name=name
     @country_population=population
@@ -24,64 +24,61 @@ class CliApplication
     @state_of_country=state
   end
   
-  def is_eligible_for_imf?()
-    if(@country_population > 10000 && @country_gdp < 10000 && @state_of_country == "Developping")
-      return true
-    end
-    return false
-  end
-
-  def is_eligible_for_wb?()
-    if(@country_population > 10000 && @country_gdp > 10000 && @state_of_country == "Developed")
-          return true
-    end
-    return false
-  end
-
-  def can_have_seat_at_un?()
-    if(@country_population > 10000 && @country_gdp > 100000 && @state_of_country == "Developed")
-      return true
-    end
-    return false
+  def show_country_strength
+    puts "#{@country_name} is having following strengths."
+    puts "-----------------------------------------------"
+    is_eligible_for_imf?
+    is_eligible_for_wb?
+    can_have_seat_at_un?
+    can_win_war?
   end
   
-  def can_win_war?()
-    if(@country_population > 10000 && @country_gdp > 100000 )
-      return true
+  private
+  def is_eligible_for_imf?
+    if(population_eligible? && !gdp_eligible? && !developed?)
+      puts "1.#{@country_name} is eligible for International Monetory Fund."
+    else
+      puts "1.#{@country_name} is not eligible for International Monetory Fund."
     end
-    return false
   end
 
-  def show_country_strength
-      puts "#{@country_name} is having following strengths."
-      puts "-----------------------------------------------"
-      
-      if(is_eligible_for_imf?())
-        puts "1.#{@country_name} is eligible for International Monetory Fund."
-      else
-        puts "1.#{@country_name} is not eligible for International Monetory Fund."
-      end
+  def is_eligible_for_wb?
+    if(population_eligible? && gdp_eligible? && developed?)
+      puts "2.#{@country_name} is eligible for World Bank Loan."
+    else
+      puts "2.#{@country_name} is not eligible for World Bank Loan."
+    end
+  end
 
-      if(is_eligible_for_wb?())
-        puts "2.#{@country_name} is eligible for World Bank Loan."
-      else
-        puts "2.#{@country_name} is not eligible for World Bank Loan."
-      end 
-      if(can_have_seat_at_un?())
-        puts "3.#{@country_name} is eligible for United Nations Seat."
-      else
-        puts "3.#{@country_name} is not eligible for United Nations Seat."
-      end
+  def can_have_seat_at_un?
+    if(population_eligible? && gdp_eligible? && developed?)
+       puts "3.#{@country_name} is eligible for United Nations Seat."
+    else
+       puts "3.#{@country_name} is eligible for United Nations Seat."
+    end
+  end
 
-      if(can_win_war?())
-        puts "4.#{@country_name} can win war."        
-      else
-        puts "4.#{@country_name} can not win war against mejor countries."        
-      end
+  def can_win_war?
+    if(population_eligible? && gdp_eligible?)
+       puts "4.#{@country_name} can win war."
+    else  
+       puts "4.#{@country_name} can not win war against mejor countries."
+    end     
+  end
+
+  def population_eligible?
+    @country_population > 10000
+  end
+
+  def gdp_eligible?
+    @country_gdp > 100000
+  end
+  
+  def developed?
+    @state_of_country == "Developed"
   end
 
 end
-
 
 def take_country_details
   puts "Enter name of country :->"
@@ -100,31 +97,39 @@ def take_country_details
 end
 
 country_data=take_country_details
-india=CliApplication.new(country_data[0],country_data[1],country_data[2],country_data[3],country_data[4],country_data[5])
-india.show_country_strength
+country1=CliApplication.new(country_data[0],country_data[1],country_data[2],country_data[3],country_data[4],country_data[5])
+country1.show_country_strength
+
+country1.country_name="USA"
+country1.country_gdp=6521765476
+country1.state_of_country="Developed"
+country1.show_country_strength
 
 
-
-=begin OUTPUT:->
-ravidas@ravidas-HP-EliteBook-840-G6:~/Desktop/Ruby_Code/Assignment04$ ruby cli_application.rb
+=begin OUTPUT
 Enter name of country :->
-India
+India 
 Enter population of India :->
-62354265
+43645675736
 Enter gdp of India :->
-3625143642
+3265462486
 Enter number of states of India :->
-29
+29 
 Enter army strength of India :->
-2435335
+3275476345
 Enetr state of India :->:
 Developing
 India is having following strengths.
 -----------------------------------------------
 1.India is not eligible for International Monetory Fund.
 2.India is not eligible for World Bank Loan.
-3.India is not eligible for United Nations Seat.
+3.India is eligible for United Nations Seat.
 4.India can win war.
-
+USA is having following strengths.
+-----------------------------------------------
+1.USA is not eligible for International Monetory Fund.
+2.USA is eligible for World Bank Loan.
+3.USA is eligible for United Nations Seat.
+4.USA can win war.
 =end
 
