@@ -14,14 +14,15 @@ Whether the country can win the war or not
 =end
 
 class CliApplication
-  attr_accessor :country_name,:country_population,:country_gdp,:number_of_states,:army_strength,:state_of_country
-  def initialize(name,population,gdp,states,strength,state)
-    @country_name=name
-    @country_population=population
-    @country_gdp=gdp
-    @number_of_states=states
-    @army_strength=strength
-    @state_of_country=state
+  attr_accessor :country_name, :country_population, :country_gdp, :number_of_states, :army_strength, :state_of_country
+
+  def initialize(name, population, gdp, states, strength, state)
+    @country_name = name
+    @country_population = population
+    @country_gdp = gdp
+    @number_of_states = states
+    @army_strength = strength
+    @state_of_country = state
   end
   
   def show_country_strength
@@ -29,11 +30,10 @@ class CliApplication
     puts "-----------------------------------------------"
     is_eligible_for_imf?
     is_eligible_for_wb?
-    can_have_seat_at_un?
-    can_win_war?
+    is_eligible_to_have_seat_at_un?
+    is_eligible_win_war?
   end
   
-  private
   def is_eligible_for_imf?
     if(population_eligible? && !gdp_eligible? && !developed?)
       puts "1.#{@country_name} is eligible for International Monetory Fund."
@@ -50,7 +50,7 @@ class CliApplication
     end
   end
 
-  def can_have_seat_at_un?
+  def is_eligible_to_have_seat_at_un?
     if(population_eligible? && gdp_eligible? && developed?)
        puts "3.#{@country_name} is eligible for United Nations Seat."
     else
@@ -58,13 +58,15 @@ class CliApplication
     end
   end
 
-  def can_win_war?
+  def is_eligible_win_war?
     if(population_eligible? && gdp_eligible?)
        puts "4.#{@country_name} can win war."
     else  
        puts "4.#{@country_name} can not win war against mejor countries."
     end     
   end
+
+  private
 
   def population_eligible?
     @country_population > 10000
@@ -77,32 +79,36 @@ class CliApplication
   def developed?
     @state_of_country == "Developed"
   end
-
 end
 
 def take_country_details
   puts "Enter name of country :->"
-  name=gets.chomp
+  name = gets.chomp
+
   puts "Enter population of #{name} :->"
-  population=gets.chomp.to_i
+  population = gets.chomp.to_i
+
   puts "Enter gdp of #{name} :->"
-  gdp=gets.chomp.to_i
+  gdp = gets.chomp.to_i
+
   puts "Enter number of states of #{name} :->"
-  states=gets.chomp.to_i
+  states = gets.chomp.to_i
+
   puts "Enter army strength of #{name} :->"
-  strength=gets.chomp.to_i
+  strength = gets.chomp.to_i
+
   puts "Enetr state of #{name} :->:"
-  state=gets.chomp
-  return name,population,gdp,states,strength,state;
+  state = gets.chomp
+  return [name, population, gdp, states, strength, state];
 end
 
-country_data=take_country_details
-country1=CliApplication.new(country_data[0],country_data[1],country_data[2],country_data[3],country_data[4],country_data[5])
+country_data = take_country_details
+country1 = CliApplication.new(country_data[0], country_data[1], country_data[2], country_data[3], country_data[4], country_data[5])
 country1.show_country_strength
 
-country1.country_name="USA"
-country1.country_gdp=6521765476
-country1.state_of_country="Developed"
+country1.country_name = "USA"
+country1.country_gdp = 6521765476
+country1.state_of_country = "Developed"
 country1.show_country_strength
 
 
@@ -133,3 +139,6 @@ USA is having following strengths.
 4.USA can win war.
 =end
 
+=begin
+Methods in Ruby can only return one value. That means they can return one Ruby object. If we want to return more than one value, well then we need to use a Ruby object that can hold more values. An array or a hash are useful for returning more than one valuez.
+=end
