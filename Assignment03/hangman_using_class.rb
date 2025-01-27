@@ -10,10 +10,10 @@ class HangmanGame
   end
 
   def play_game
-    while is_valid_word? &&  is_valid_chances?
-      update_of_game
-      take_input
-      if is_valid_character? && is_valid_length? && !guess_included?
+    while is_valid_word? &&  is_remaining_chance?
+      status_of_attempt
+      input_character
+      if validate_character? && validate_length? && !guess_included?
         @guesses << @guess
         if @word.include?(@guess)
           @word.chars.each_with_index do |char, index|
@@ -42,26 +42,26 @@ class HangmanGame
     @display_word.join != @word
   end
 
-  def is_valid_chances?
+  def is_remaining_chance?
     @guesses.size < MAX_CHANCES
   end
 
-  def update_of_game
+  def status_of_attempt
     puts "\nWord: #{@display_word.join(' ')}"
     puts "Guesses: #{@guesses.join(', ')}"
     puts "Attempts left: #{MAX_CHANCES - @guesses.size}"
   end
 
-  def take_input
+  def input_character
     print "Enter your guess (a single letter): "
     @guess = gets.chomp.downcase
   end
 
-  def is_valid_character?
+  def validate_character?
     @guess.match?(/^[a-z]$/)
   end
 
-  def is_valid_length?
+  def validate_length?
     @guess.length == 1
   end
 
