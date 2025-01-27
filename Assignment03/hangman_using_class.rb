@@ -116,3 +116,4 @@ Correct! The letter 'u' is at position 2.
 
 Congratulations! You guessed the word: ruby
 =end
+
