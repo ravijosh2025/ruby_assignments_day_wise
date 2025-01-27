@@ -103,13 +103,13 @@ def take_country_details
 end
 
 country_data = take_country_details
-country1 = CliApplication.new(country_data[0], country_data[1], country_data[2], country_data[3], country_data[4], country_data[5])
-country1.show_country_strength
+country = CliApplication.new(country_data[0], country_data[1], country_data[2], country_data[3], country_data[4], country_data[5])
+country.show_country_strength
 
-country1.country_name = "USA"
-country1.country_gdp = 6521765476
-country1.state_of_country = "Developed"
-country1.show_country_strength
+country.country_name = "USA"
+country.country_gdp = 6521765476
+country.state_of_country = "Developed"
+country.show_country_strength
 
 
 =begin OUTPUT
@@ -142,3 +142,4 @@ USA is having following strengths.
 =begin
 Methods in Ruby can only return one value. That means they can return one Ruby object. If we want to return more than one value, well then we need to use a Ruby object that can hold more values. An array or a hash are useful for returning more than one valuez.
 =end
+
